@@ -20,8 +20,28 @@ function App() {
     setUsersText(usersText + keyChar);
   }
 
+  function handleSettingClick() {
+    alert("entered handleSettingClick");
+  }
+
   return (
     <>
+      <ButtonSetting
+        id="deleteBut"
+        value="Delete"
+        onClickSetting={handleSettingClick}
+      />
+      <ButtonSetting
+        id="clearBtn"
+        value="Clear"
+        onClickSetting={handleSettingClick}
+      />
+      <ButtonSetting
+        id="toLowerOrLowerCase"
+        value="To lower case"
+        onClickSetting={handleSettingClick}
+      />
+
       <Text key={"text"} textString={usersText} />
 
       <div id="NumbersDiv">
