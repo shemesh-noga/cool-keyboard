@@ -22,6 +22,35 @@ function App() {
 
   function handleSettingClick(id) {
     alert(`entered handleSettingClick from  ${id}`);
+
+    switch (id) {
+      case id === "deleteBtn":
+        // code block
+        break;
+      case id === "clearBtn":
+        // code block
+        break;
+      case id === "toLowerOrLowerCase":
+        // code block
+        break;
+      case id === "undoBtn":
+        // code block
+        break;
+      case id === "fontBtn":
+        // code block
+        break;
+      case id === "fonsizePlusBtn":
+        // code block
+        break;
+      case id === "fonsizeMinusBtn":
+        // code block
+        break;
+      case id === "colorBtn":
+        // code block
+        break;
+      default:
+      // code block
+    }
   }
 
   return (
