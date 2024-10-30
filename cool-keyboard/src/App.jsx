@@ -6,7 +6,7 @@ import ButtonSetting from "./components/ButtonSetting";
 import Text from "./components/Text";
 
 function App() {
-  const [usersText, setUsersText] = useState("Hello Rebbeka");
+  const [usersText, setUsersText] = useState("Hello Noga, Good morning :)");
   console.log(hebrew);
   console.log(english);
   const numbers = [...english].filter((keychar, i) => i < 10);
@@ -16,40 +16,74 @@ function App() {
   const special = [...english].filter((keychar, i) => i > english.length - 8);
 
   function handleClickKey(keyChar) {
-    console.log("pressed  " + keyChar + "  hii noga and rebbeka");
+    console.log("pressed  " + keyChar + "  hi Noga and Rebbeka");
     setUsersText(usersText + keyChar);
   }
 
-  function handleSettingClick(id) {
-    alert(`entered handleSettingClick from  ${id}`);
+  function handleDeleteBtn() {
+    setUsersText(usersText.substring(0, usersText.length - 1));
+  }
 
+  function handleClearBtn() {
+    alert(`Entered handle clear btn`);
+    setUsersText("");
+  }
+
+  function handleCaseChange() {
+    alert(`Entered handle case btn`);
+  }
+
+  function handleUndoBtn() {
+    alert(`Entered handle undo btn`);
+  }
+
+  function handleFontBtn() {
+    alert(`Entered handle font type btn`);
+  }
+
+  function handleFonsizePlusBtn() {
+    alert(`Entered handle Font size plus btn`);
+    //setUsersText(usersText.style={{fontSize}}); //doesn't work yet
+  }
+
+  function handleFonsizeMinusBtn() {
+    alert(`Entered handle font size minus btn`);
+  }
+
+  function handleColorBtn() {
+    alert(`Entered handle color btn`);
+  }
+
+  function handleSettingClick(id) {
     switch (id) {
-      case id === "deleteBtn":
-        // code block
+      case "deleteBtn":
+        handleDeleteBtn();
         break;
-      case id === "clearBtn":
-        // code block
+      case "clearBtn":
+        handleClearBtn();
         break;
-      case id === "toLowerOrLowerCase":
-        // code block
+      case "toLowerOrLowerCase":
+        handleCaseChange();
         break;
-      case id === "undoBtn":
-        // code block
+      case "undoBtn":
+        handleUndoBtn();
         break;
-      case id === "fontBtn":
-        // code block
+      case "fontBtn":
+        handleFontBtn();
         break;
-      case id === "fonsizePlusBtn":
-        // code block
+      case "fonsizePlusBtn":
+        handleFonsizePlusBtn();
         break;
-      case id === "fonsizeMinusBtn":
-        // code block
+      case "fonsizeMinusBtn":
+        handleFonsizeMinusBtn();
         break;
-      case id === "colorBtn":
-        // code block
+      case "colorBtn":
+        handleColorBtn();
         break;
       default:
-      // code block
+        alert(
+          `you've entered handle settings click, but you're id didn't match anythig`
+        );
     }
   }
 
@@ -85,6 +119,7 @@ function App() {
         value="+"
         onClickSetting={handleSettingClick}
       />
+      <p className="settingsItem"></p>
       <ButtonSetting
         id="fonsizeMinusBtn"
         value="-"
