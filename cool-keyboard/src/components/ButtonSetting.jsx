@@ -1,7 +1,9 @@
 function ButtonSetting(props) {
   return (
     <>
-      <button onClick={() => props.onClickSetting()}>{props.value}</button>
+      <button onClick={() => props.onClickSetting(props.id)}>
+        {props.value}
+      </button>
     </>
   );
 }

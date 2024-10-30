@@ -20,14 +20,14 @@ function App() {
     setUsersText(usersText + keyChar);
   }
 
-  function handleSettingClick() {
-    alert("entered handleSettingClick");
+  function handleSettingClick(id) {
+    alert(`entered handleSettingClick from  ${id}`);
   }
 
   return (
     <>
       <ButtonSetting
-        id="deleteBut"
+        id="deleteBtn"
         value="Delete"
         onClickSetting={handleSettingClick}
       />
@@ -41,6 +41,28 @@ function App() {
         value="To lower case"
         onClickSetting={handleSettingClick}
       />
+      <ButtonSetting
+        id="undoBtn"
+        value="Undo"
+        onClickSetting={handleSettingClick}
+      />
+      <ButtonSetting
+        id="fontBtn"
+        value="Font"
+        onClickSetting={handleSettingClick}
+      />
+      <ButtonSetting
+        id="fonsizePlusBtn"
+        value="+"
+        onClickSetting={handleSettingClick}
+      />
+      <ButtonSetting
+        id="fonsizeMinusBtn"
+        value="-"
+        onClickSetting={handleSettingClick}
+      />
+      <label for="color">Color:</label>
+      <input type="color" id="colorBtn" name="colorBtn" value="#ff0000" />
 
       <Text key={"text"} textString={usersText} />
 
