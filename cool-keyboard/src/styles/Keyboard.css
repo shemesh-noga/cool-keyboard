@@ -1,0 +1,14 @@
+.keyNumber {
+  color: red;
+}
+
+.KeySingle {
+  padding: 5px 10px;
+  margin: 1px;
+  font-size: 1.5em;
+}
+
+#NumbersDiv {
+  border: 1px solid black;
+  display: inline;
+}
