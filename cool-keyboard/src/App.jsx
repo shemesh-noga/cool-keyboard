@@ -71,70 +71,34 @@ function App() {
     setColor(colorVal);
   }
 
-  function handleLangChangeBtn() {
-    console.log("language: ", language);
-    if (language === englishUpperCase || language === englishLowerCase) {
-      setLanguage(hebrew);
-    } else if (language === hebrew) {
-      setLanguage(englishUpperCase);
-    }
-  }
-
-  function handleSettingClick(id) {
-    switch (id) {
-      case "deleteBtn":
-        handleDeleteBtn();
-        break;
-      case "clearBtn":
-        handleClearBtn();
-        break;
-      case "toLowerOrLowerCase":
-        handleCaseChange();
-        break;
-      case "undoBtn":
-        handleUndoBtn();
-        break;
-      case "fontBtn":
-        handleFontBtn();
-        break;
-      case "fonsizePlusBtn":
-        handleFonsizePlusBtn();
-        break;
-      case "fonsizeMinusBtn":
-        handleFonsizeMinusBtn();
-        break;
-      case "langChangeBtn":
-        handleLangChangeBtn();
-        break;
-    }
-  }
-
   return (
     <>
       <ButtonSetting
         id="deleteBtn"
         value="Delete"
-        onClickSetting={handleSettingClick}
+        onClickSetting={() => handleDeleteBtn()}
       />
+
       <ButtonSetting
         id="clearBtn"
         value="Clear"
-        onClickSetting={handleSettingClick}
+        onClickSetting={() => handleClearBtn()}
       />
+
       {language !== hebrew && (
         <ButtonSetting
           id="toLowerOrLowerCase"
           value={
             language == englishUpperCase ? "To lower case" : "To upper case"
           }
-          onClickSetting={handleSettingClick}
+          onClickSetting={() => handleCaseChange()}
         />
       )}
 
       <ButtonSetting
         id="undoBtn"
         value="Undo"
-        onClickSetting={handleSettingClick}
+        onClickSetting={() => handleUndoBtn()}
       />
 
       <label htmlFor="selectFont">Font: </label>
@@ -149,21 +113,17 @@ function App() {
       <ButtonSetting
         id="fonsizePlusBtn"
         value="+"
-        onClickSetting={handleSettingClick}
+        onClickSetting={() => handleFonsizePlusBtn()}
       />
       <p className="settingsItem" style={{ fontSize: fontSize }}>
         {fontSize}
       </p>
+
       <ButtonSetting
         id="fonsizeMinusBtn"
         value="-"
-        onClickSetting={handleSettingClick}
+        onClickSetting={() => handleFonsizeMinusBtn()}
       />
-      {/* <ButtonSetting
-        id="langChangeBtn"
-        value="Change Lang"
-        onClickSetting={handleSettingClick}
-      /> */}
 
       <label htmlFor="selectLanguage">Language: </label>
       <select
