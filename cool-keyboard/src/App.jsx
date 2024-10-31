@@ -199,7 +199,7 @@ function App() {
 
       <Text thiKey={usersText * Math.random()} textString={usersText} />
 
-      <div id="NumbersDiv">
+      <div class="keyboardKey" id="NumbersDiv">
         {numbers.map((keyChar, i) => (
           <Keyboard
             id={i}
@@ -211,7 +211,7 @@ function App() {
         ))}
       </div>
 
-      <div id="LettersDiv">
+      <div class="keyboardKey" id="LettersDiv">
         {letters.map((keyChar, i) => (
           <Keyboard
             id={i + 10}
@@ -223,7 +223,7 @@ function App() {
         ))}
       </div>
 
-      <div id="SpecialDiv">
+      <div class="keyboardKey" id="SpecialDiv">
         {special.map((keyChar, i) => (
           <Keyboard
             id={language.length - 8 + i}
