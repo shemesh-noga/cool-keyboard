@@ -28,7 +28,7 @@ function App() {
 
   function handleClickKey(keyChar) {
     setUsersText((prevText) => [
-      [...prevText],
+      ...prevText,
       <Letter
         key={Math.random()}
         style={{ fontSize: fontSize, color: color }}
@@ -38,7 +38,7 @@ function App() {
   }
 
   function handleDeleteBtn() {
-    setUsersText(usersText.substring(0, usersText.length - 1));
+    setUsersText((prevText) => prevText.slice(0, -1));
   }
 
   function handleClearBtn() {
@@ -103,6 +103,9 @@ function App() {
       case "fonsizeMinusBtn":
         handleFonsizeMinusBtn();
         break;
+      case "langChangeBtn":
+        handleLangChangeBtn();
+        break;
     }
   }
 
@@ -165,10 +168,7 @@ function App() {
         onChange={(e) => handleColorBtn(e.target.value)}
       />
 
-      <Text
-        thiKey={usersText * Math.random() + usersText.length}
-        textString={usersText}
-      />
+      <Text thiKey={usersText * Math.random()} textString={usersText} />
 
       <div id="NumbersDiv">
         {numbers.map((keyChar, i) => (
