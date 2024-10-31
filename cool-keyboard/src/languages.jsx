@@ -137,4 +137,4 @@ export const englishLowerCase = [
   "-",
 ];
 
-export const allLang = [hebrew, englishLowerCase];
+export const allLang = [{ hebrew: hebrew }, { english: englishLowerCase }];

@@ -10,15 +10,18 @@ import Keyboard from "./components/Keyboard";
 import ButtonSetting from "./components/ButtonSetting";
 import Text from "./components/Text";
 import Letter from "./components/Letter";
+import ourFonts from "./fonts";
 
 function App() {
   const [usersText, setUsersText] = useState([
-    [<Letter value={"hi!"} Style={{ fontSize: 16 }} />],
+    [<Letter value={"hi!"} Style={{ fontSize: 32 }} />],
   ]);
   const [language, setLanguage] = useState(englishUpperCase);
-  const [fontSize, setFontSize] = useState(16);
+  const [fontSize, setFontSize] = useState(32);
   const [color, setColor] = useState("#000000");
+  const [font, setFont] = useState("");
   let size;
+  // allLang.map((lang) => console.log(Object.values(lang)[0]));
 
   const numbers = [...language].filter((keychar, i) => i < 10);
   const letters = [...language].filter(
@@ -31,7 +34,7 @@ function App() {
       ...prevText,
       <Letter
         key={Math.random()}
-        style={{ fontSize: fontSize, color: color }}
+        style={{ fontSize: fontSize, color: color, fontFamily: font }}
         value={keyChar}
       />,
     ]);
@@ -60,11 +63,11 @@ function App() {
   }
 
   function handleFonsizePlusBtn() {
-    setFontSize((prevSize) => prevSize + 1);
+    setFontSize((prevSize) => prevSize + 2);
   }
 
   function handleFonsizeMinusBtn() {
-    setFontSize((prevSize) => prevSize - 1);
+    setFontSize((prevSize) => prevSize - 2);
   }
 
   function handleColorBtn(colorVal) {
@@ -136,11 +139,16 @@ function App() {
         value="Undo"
         onClickSetting={handleSettingClick}
       />
-      <ButtonSetting
-        id="fontBtn"
-        value="Font"
-        onClickSetting={handleSettingClick}
-      />
+
+      <label htmlFor="selectFont">Font: </label>
+      <select id="selectFont" onChange={(e) => setFont(e.target.value)}>
+        {ourFonts.map((font) => (
+          <option style={{ fontFamily: font }} value={font}>
+            {font}
+          </option>
+        ))}
+      </select>
+
       <ButtonSetting
         id="fonsizePlusBtn"
         value="+"
@@ -154,11 +162,27 @@ function App() {
         value="-"
         onClickSetting={handleSettingClick}
       />
-      <ButtonSetting
+      {/* <ButtonSetting
         id="langChangeBtn"
         value="Change Lang"
         onClickSetting={handleSettingClick}
-      />
+      /> */}
+
+      <label htmlFor="selectLanguage">Language: </label>
+      <select
+        id="selectLanguage"
+        onChange={(e) => {
+          let newLang = e.target.value.split(",");
+          console.log(newLang);
+          setLanguage(newLang);
+        }}
+      >
+        {allLang.map((langObj) => (
+          <option value={Object.values(langObj)}>
+            {Object.keys(langObj)[0]}
+          </option>
+        ))}
+      </select>
 
       <label htmlFor="color">Color:</label>
       <input

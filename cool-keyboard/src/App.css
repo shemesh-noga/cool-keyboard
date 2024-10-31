@@ -1,7 +1,29 @@
+@font-face {
+  font-family: "Itim";
+  src: url("./styles/Itim-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: url("./styles/Quicksand-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: "Playwrite";
+  src: url("./styles/PlaywriteGBS-Italic-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./styles/Manrope-Light.ttf");
+}
+
 * {
   box-sizing: border-box;
   margin: 0%;
   padding: 0%;
+  font-family: "Manrope";
+  font-weight: 700;
 }
 
 .settingsItem {
