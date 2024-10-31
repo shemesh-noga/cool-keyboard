@@ -16,19 +16,38 @@ function App() {
   const [usersText, setUsersText] = useState([
     [<Letter value={"hi!"} Style={{ fontSize: 32 }} />],
   ]);
-  const [language, setLanguage] = useState(englishUpperCase);
+  const [language, setLanguage] = useState("hebrew");
   const [fontSize, setFontSize] = useState(32);
   const [color, setColor] = useState("#000000");
   const [font, setFont] = useState("");
   let size;
-  // let LangArr = JSON.parse(JSON.stringify(allLang));
-  // console.log(LangArr);
 
-  const numbers = [...language].filter((keychar, i) => i < 10);
-  const letters = [...language].filter(
-    (keychar, i) => i < language.length - 8 && i >= 10
+  let languageArr;
+  switch (language) {
+    case "hebrew":
+      languageArr = hebrew;
+      break;
+    case "englishLowerCase":
+    case "english":
+      languageArr = englishLowerCase;
+      break;
+    case "englishUpperCase":
+      languageArr = englishUpperCase;
+      break;
+
+    default:
+      languageArr = ["a"];
+      break;
+  }
+  console.log("languageArr: ", languageArr);
+
+  const numbers = [...languageArr].filter((keychar, i) => i < 10);
+  const letters = [...languageArr].filter(
+    (keychar, i) => i < languageArr.length - 8 && i >= 10
   );
-  const special = [...language].filter((keychar, i) => i > language.length - 8);
+  const special = [...languageArr].filter(
+    (keychar, i) => i > languageArr.length - 8
+  );
 
   function handleClickKey(keyChar) {
     setUsersText((prevText) => [
@@ -51,8 +70,8 @@ function App() {
 
   function handleCaseChange() {
     return language === englishUpperCase
-      ? setLanguage(englishLowerCase)
-      : setLanguage(englishUpperCase);
+      ? setLanguage("englishLowerCase")
+      : setLanguage("englishUpperCase");
   }
 
   function handleUndoBtn() {
@@ -130,16 +149,7 @@ function App() {
         id="selectLanguage"
         onChange={(e) => {
           let langName = e.target.value;
-          console.log(langName);
-          let thisArr;
-          for (let langObj of allLang) {
-            if (Object.keys(langObj)[0] === langName) {
-              thisArr = Object.values(langObj)[0];
-              console.log(thisArr);
-              setLanguage(thisArr);
-              break;
-            }
-          }
+          setLanguage(langName);
         }}
       >
         {allLang.map((langObj) => (
@@ -159,40 +169,42 @@ function App() {
 
       <Text thiKey={usersText * Math.random()} textString={usersText} />
 
-      <div class="keyboardKey" id="NumbersDiv">
-        {numbers.map((keyChar, i) => (
-          <Keyboard
-            id={i}
-            key={`number-${i}`}
-            value={keyChar}
-            onclickKey={handleClickKey}
-            langLength={language.length}
-          />
-        ))}
-      </div>
+      <div id="Keyboard">
+        <div class="keyboardKey" id="NumbersDiv">
+          {numbers.map((keyChar, i) => (
+            <Keyboard
+              id={i}
+              key={`number-${i}`}
+              value={keyChar}
+              onclickKey={handleClickKey}
+              langLength={language.length}
+            />
+          ))}
+        </div>
 
-      <div class="keyboardKey" id="LettersDiv">
-        {letters.map((keyChar, i) => (
-          <Keyboard
-            id={i + 10}
-            key={`letter-${i + 10}`}
-            value={keyChar}
-            onclickKey={handleClickKey}
-            langLength={language.length}
-          />
-        ))}
-      </div>
+        <div class="keyboardKey" id="LettersDiv">
+          {letters.map((keyChar, i) => (
+            <Keyboard
+              id={i + 10}
+              key={`letter-${i + 10}`}
+              value={keyChar}
+              onclickKey={handleClickKey}
+              langLength={language.length}
+            />
+          ))}
+        </div>
 
-      <div class="keyboardKey" id="SpecialDiv">
-        {special.map((keyChar, i) => (
-          <Keyboard
-            id={language.length - 8 + i}
-            key={`special-${language.length - 8 + i}`}
-            value={keyChar}
-            onclickKey={handleClickKey}
-            langLength={language.length}
-          />
-        ))}
+        <div class="keyboardKey" id="SpecialDiv">
+          {special.map((keyChar, i) => (
+            <Keyboard
+              id={language.length - 8 + i}
+              key={`special-${language.length - 8 + i}`}
+              value={keyChar}
+              onclickKey={handleClickKey}
+              langLength={language.length}
+            />
+          ))}
+        </div>
       </div>
     </>
   );
