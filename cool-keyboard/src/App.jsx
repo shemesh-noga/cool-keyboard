@@ -8,6 +8,8 @@ import Text from "./components/Text";
 function App() {
   const [usersText, setUsersText] = useState("Hello Noga, Good morning :)");
   const [language, setLanguage] = useState(englishUpperCase);
+  const [fontSize, setFontSize] = useState(16);
+  let size;
 
   console.log(hebrew);
   console.log(englishLowerCase);
@@ -27,7 +29,6 @@ function App() {
   }
 
   function handleClearBtn() {
-    alert(`Entered handle clear btn`);
     setUsersText("");
   }
 
@@ -46,12 +47,17 @@ function App() {
   }
 
   function handleFonsizePlusBtn() {
-    alert(`Entered handle Font size plus btn`);
-    //setUsersText(usersText.style={{fontSize}}); //doesn't work yet
+    size = fontSize;
+    console.log("fontSize:" + fontSize);
+    console.log("size:" + size++);
+    setFontSize(size++);
   }
 
   function handleFonsizeMinusBtn() {
-    alert(`Entered handle font size minus btn`);
+    size = fontSize;
+    console.log("fontSize:" + fontSize);
+    console.log("size:" + size--);
+    setFontSize(size--);
   }
 
   function handleColorBtn() {
@@ -128,7 +134,9 @@ function App() {
         value="+"
         onClickSetting={handleSettingClick}
       />
-      <p className="settingsItem"></p>
+      <p className="settingsItem" style={{ fontSize: fontSize }}>
+        {fontSize}
+      </p>
       <ButtonSetting
         id="fonsizeMinusBtn"
         value="-"
@@ -138,7 +146,7 @@ function App() {
       <label for="color">Color:</label>
       <input type="color" id="colorBtn" name="colorBtn" value="#ff0000" />
 
-      <Text key={"text"} textString={usersText} />
+      <Text key={"text"} textString={usersText} fontSize={fontSize} />
 
       <div id="NumbersDiv">
         {numbers.map((keyChar, i) => (
