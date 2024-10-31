@@ -1,6 +1,11 @@
 import { useState } from "react";
 import "./App.css";
-import { hebrew, englishLowerCase, englishUpperCase } from "./languages";
+import {
+  hebrew,
+  englishLowerCase,
+  englishUpperCase,
+  allLang,
+} from "./languages";
 import Keyboard from "./components/Keyboard";
 import ButtonSetting from "./components/ButtonSetting";
 import Text from "./components/Text";
@@ -11,8 +16,6 @@ function App() {
   const [fontSize, setFontSize] = useState(16);
   let size;
 
-  console.log(hebrew);
-  console.log(englishLowerCase);
   const numbers = [...language].filter((keychar, i) => i < 10);
   const letters = [...language].filter(
     (keychar, i) => i < language.length - 8 && i >= 10
@@ -63,6 +66,15 @@ function App() {
     alert(`Entered handle color btn`);
   }
 
+  function handleLangChangeBtn() {
+    console.log("language: ", language);
+    if (language === englishUpperCase || language === englishLowerCase) {
+      setLanguage(hebrew);
+    } else if (language === hebrew) {
+      setLanguage(englishUpperCase);
+    }
+  }
+
   function handleSettingClick(id) {
     switch (id) {
       case "deleteBtn":
@@ -88,6 +100,9 @@ function App() {
         break;
       case "colorBtn":
         handleColorBtn();
+        break;
+      case "langChangeBtn":
+        handleLangChangeBtn();
         break;
       default:
         alert(
@@ -139,6 +154,11 @@ function App() {
       <ButtonSetting
         id="fonsizeMinusBtn"
         value="-"
+        onClickSetting={handleSettingClick}
+      />
+      <ButtonSetting
+        id="langChangeBtn"
+        value="Change Lang"
         onClickSetting={handleSettingClick}
       />
 

@@ -136,3 +136,5 @@ export const englishLowerCase = [
   "?",
   "-",
 ];
+
+export const allLang = [hebrew, englishLowerCase];
