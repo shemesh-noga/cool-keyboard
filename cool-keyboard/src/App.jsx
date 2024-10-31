@@ -9,11 +9,15 @@ import {
 import Keyboard from "./components/Keyboard";
 import ButtonSetting from "./components/ButtonSetting";
 import Text from "./components/Text";
+import Letter from "./components/Letter";
 
 function App() {
-  const [usersText, setUsersText] = useState("Hello Noga, Good morning :)");
+  const [usersText, setUsersText] = useState([
+    [<Letter value={"hi!"} Style={{ fontSize: 16 }} />],
+  ]);
   const [language, setLanguage] = useState(englishUpperCase);
-  const [fontSize, setFontSize] = useState(32);
+  const [fontSize, setFontSize] = useState(16);
+  const [color, setColor] = useState("#000000");
   let size;
 
   const numbers = [...language].filter((keychar, i) => i < 10);
@@ -23,7 +27,14 @@ function App() {
   const special = [...language].filter((keychar, i) => i > language.length - 8);
 
   function handleClickKey(keyChar) {
-    setUsersText(usersText + keyChar);
+    setUsersText((prevText) => [
+      [...prevText],
+      <Letter
+        key={Math.random()}
+        style={{ fontSize: fontSize, color: color }}
+        value={keyChar}
+      />,
+    ]);
   }
 
   function handleDeleteBtn() {
@@ -49,21 +60,15 @@ function App() {
   }
 
   function handleFonsizePlusBtn() {
-    size = fontSize;
-    console.log("fontSize:" + fontSize);
-    console.log("size:" + size++);
-    setFontSize(size++);
+    setFontSize((prevSize) => prevSize + 1);
   }
 
   function handleFonsizeMinusBtn() {
-    size = fontSize;
-    console.log("fontSize:" + fontSize);
-    console.log("size:" + size--);
-    setFontSize(size--);
+    setFontSize((prevSize) => prevSize - 1);
   }
 
-  function handleColorBtn() {
-    alert(`Entered handle color btn`);
+  function handleColorBtn(colorVal) {
+    setColor(colorVal);
   }
 
   function handleLangChangeBtn() {
@@ -98,16 +103,6 @@ function App() {
       case "fonsizeMinusBtn":
         handleFonsizeMinusBtn();
         break;
-      case "colorBtn":
-        handleColorBtn();
-        break;
-      case "langChangeBtn":
-        handleLangChangeBtn();
-        break;
-      default:
-        alert(
-          `you've entered handle settings click, but you're id didn't match anythig`
-        );
     }
   }
 
@@ -162,12 +157,20 @@ function App() {
         onClickSetting={handleSettingClick}
       />
 
-      <label for="color">Color:</label>
-      <input type="color" id="colorBtn" name="colorBtn" value="#ff0000" />
+      <label htmlFor="color">Color:</label>
+      <input
+        type="color"
+        id="colorBtn"
+        name="colorBtn"
+        onChange={(e) => handleColorBtn(e.target.value)}
+      />
 
-      <Text key={"text"} textString={usersText} fontSize={fontSize} />
+      <Text
+        thiKey={usersText * Math.random() + usersText.length}
+        textString={usersText}
+      />
 
-      <div id="NumbersDiv">
+      <div class="keyboardKey" id="NumbersDiv">
         {numbers.map((keyChar, i) => (
           <Keyboard
             id={i}
@@ -179,7 +182,7 @@ function App() {
         ))}
       </div>
 
-      <div id="LettersDiv">
+      <div class="keyboardKey" id="LettersDiv">
         {letters.map((keyChar, i) => (
           <Keyboard
             id={i + 10}
@@ -191,7 +194,7 @@ function App() {
         ))}
       </div>
 
-      <div id="SpecialDiv">
+      <div class="keyboardKey" id="SpecialDiv">
         {special.map((keyChar, i) => (
           <Keyboard
             id={language.length - 8 + i}
