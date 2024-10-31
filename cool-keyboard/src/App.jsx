@@ -4,17 +4,21 @@ import {
   hebrew,
   englishLowerCase,
   englishUpperCase,
+  numbers,
+  specials,
   allLang,
 } from "./languages";
-import Keyboard from "./components/Keyboard";
+import Key from "./components/Key";
+import KeyboardKind from "./components/KeyboardKind";
 import ButtonSetting from "./components/ButtonSetting";
 import Text from "./components/Text";
 import Letter from "./components/Letter";
 import ourFonts from "./fonts";
+import Select from "./components/Select";
 
 function App() {
   const [usersText, setUsersText] = useState([
-    [<Letter value={"hi!"} Style={{ fontSize: 32 }} />],
+    [<Letter value={"Write Here:)"} Style={{ fontSize: 32 }} />],
   ]);
   const [language, setLanguage] = useState("hebrew");
   const [fontSize, setFontSize] = useState(32);
@@ -22,32 +26,23 @@ function App() {
   const [font, setFont] = useState("");
   let size;
 
-  let languageArr;
+  let languageArrLettes;
   switch (language) {
     case "hebrew":
-      languageArr = hebrew;
+      languageArrLettes = hebrew;
       break;
     case "englishLowerCase":
     case "english":
-      languageArr = englishLowerCase;
+      languageArrLettes = englishLowerCase;
       break;
     case "englishUpperCase":
-      languageArr = englishUpperCase;
+      languageArrLettes = englishUpperCase;
       break;
 
     default:
-      languageArr = ["a"];
+      languageArrLettes = ["a"];
       break;
   }
-  console.log("languageArr: ", languageArr);
-
-  const numbers = [...languageArr].filter((keychar, i) => i < 10);
-  const letters = [...languageArr].filter(
-    (keychar, i) => i < languageArr.length - 8 && i >= 10
-  );
-  const special = [...languageArr].filter(
-    (keychar, i) => i > languageArr.length - 8
-  );
 
   function handleClickKey(keyChar) {
     setUsersText((prevText) => [
@@ -90,154 +85,121 @@ function App() {
     setColor(colorVal);
   }
 
-  function handleSettingClick(id) {
-    switch (id) {
-      case "deleteBtn":
-        handleDeleteBtn();
-        break;
-      case "clearBtn":
-        handleClearBtn();
-        break;
-      case "toLowerOrLowerCase":
-        handleCaseChange();
-        break;
-      case "undoBtn":
-        handleUndoBtn();
-        break;
-      case "fontBtn":
-        handleFontBtn();
-        break;
-      case "fonsizePlusBtn":
-        handleFonsizePlusBtn();
-        break;
-      case "fonsizeMinusBtn":
-        handleFonsizeMinusBtn();
-        break;
-      case "langChangeBtn":
-        handleLangChangeBtn();
-        break;
-    }
-  }
-
   return (
-    <>
-      <ButtonSetting
-        id="deleteBtn"
-        value="Delete"
-        onClickSetting={handleSettingClick}
-      />
-      <ButtonSetting
-        id="clearBtn"
-        value="Clear"
-        onClickSetting={handleSettingClick}
-      />
-      {language !== hebrew && (
+    <div id="bodyContainer">
+      <div id="controlDiv">
         <ButtonSetting
-          id="toLowerOrLowerCase"
-          value={
-            language == englishUpperCase ? "To lower case" : "To upper case"
-          }
-          onClickSetting={handleSettingClick}
+          id="deleteBtn"
+          value="Delete"
+          onClickSetting={() => handleDeleteBtn()}
         />
-      )}
+        <ButtonSetting
+          id="clearBtn"
+          value="Clear"
+          onClickSetting={() => handleClearBtn()}
+        />
+        {language !== "hebrew" && (
+          <ButtonSetting
+            id="toLowerOrLowerCase"
+            value={
+              language == englishUpperCase ? "To lower case" : "To upper case"
+            }
+            onClickSetting={() => handleCaseChange()}
+          />
+        )}
 
-      <ButtonSetting
-        id="undoBtn"
-        value="Undo"
-        onClickSetting={handleSettingClick}
-      />
+        <ButtonSetting
+          id="undoBtn"
+          value="Undo"
+          onClickSetting={() => handleUndoBtn}
+        />
 
-      <label htmlFor="selectFont">Font: </label>
-      <select id="selectFont" onChange={(e) => setFont(e.target.value)}>
-        {ourFonts.map((font) => (
-          <option style={{ fontFamily: font }} value={font}>
-            {font}
-          </option>
-        ))}
-      </select>
+        <Select
+          id="selectFont"
+          onChange={(e) => setFont(e.target.value)}
+          optionsArr={ourFonts}
+          type={font}
+          label="Font: "
+        />
 
-      <ButtonSetting
-        id="fonsizePlusBtn"
-        value="+"
-        onClickSetting={handleSettingClick}
-      />
-      <p className="settingsItem" style={{ fontSize: fontSize }}>
-        {fontSize}
-      </p>
-      <ButtonSetting
-        id="fonsizeMinusBtn"
-        value="-"
-        onClickSetting={handleSettingClick}
-      />
-      {/* <ButtonSetting
-        id="langChangeBtn"
-        value="Change Lang"
-        onClickSetting={handleSettingClick}
-      /> */}
+        <ButtonSetting
+          id="fonsizePlusBtn"
+          value="+"
+          onClickSetting={() => handleFonsizePlusBtn()}
+        />
+        <p className="settingsItem" style={{ fontSize: fontSize }}>
+          {fontSize}
+        </p>
+        <ButtonSetting
+          id="fonsizeMinusBtn"
+          value="-"
+          onClickSetting={() => handleFonsizeMinusBtn()}
+        />
 
-      <label htmlFor="selectLanguage">Language: </label>
-      <select
-        id="selectLanguage"
-        onChange={(e) => {
-          let langName = e.target.value;
-          setLanguage(langName);
-        }}
-      >
-        {allLang.map((langObj) => (
-          <option value={Object.keys(langObj)[0]}>
-            {Object.keys(langObj)[0]}
-          </option>
-        ))}
-      </select>
+        <label htmlFor="selectLanguage">Language: </label>
+        <select
+          id="selectLanguage"
+          onChange={(e) => {
+            let langName = e.target.value;
+            setLanguage(langName);
+          }}
+        >
+          {allLang.map((langObj) => (
+            <option value={Object.keys(langObj)[0]}>
+              {Object.keys(langObj)[0]}
+            </option>
+          ))}
+        </select>
 
-      <label htmlFor="color">Color:</label>
-      <input
-        type="color"
-        id="colorBtn"
-        name="colorBtn"
-        onChange={(e) => handleColorBtn(e.target.value)}
-      />
+        <label htmlFor="color">Color:</label>
+        <input
+          type="color"
+          id="colorBtn"
+          name="colorBtn"
+          onChange={(e) => handleColorBtn(e.target.value)}
+        />
+      </div>
 
-      <Text thiKey={usersText * Math.random()} textString={usersText} />
+      <Text thisKey={usersText * Math.random()} textString={usersText} />
 
       <div id="Keyboard">
         <div class="keyboardKey" id="NumbersDiv">
           {numbers.map((keyChar, i) => (
-            <Keyboard
+            <Key
               id={i}
               key={`number-${i}`}
               value={keyChar}
               onclickKey={handleClickKey}
-              langLength={language.length}
+              langLength={numbers.length}
             />
           ))}
         </div>
 
         <div class="keyboardKey" id="LettersDiv">
-          {letters.map((keyChar, i) => (
-            <Keyboard
+          {languageArrLettes.map((keyChar, i) => (
+            <Key
               id={i + 10}
               key={`letter-${i + 10}`}
               value={keyChar}
               onclickKey={handleClickKey}
-              langLength={language.length}
+              langLength={languageArrLettes.length}
             />
           ))}
         </div>
 
         <div class="keyboardKey" id="SpecialDiv">
-          {special.map((keyChar, i) => (
-            <Keyboard
+          {specials.map((keyChar, i) => (
+            <Key
               id={language.length - 8 + i}
               key={`special-${language.length - 8 + i}`}
               value={keyChar}
               onclickKey={handleClickKey}
-              langLength={language.length}
+              langLength={specials.length}
             />
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,7 +1,10 @@
 import "../styles/Keyboard.css";
 
-function Keyboard(props) {
+function Key(props) {
   function addClass(i, langLength) {
+    if (i === langLength - 5) {
+      return ["space", "KeySpecial"];
+    }
     if (i < 10) {
       return "keyNumber";
     } else if (i > langLength - 8 && i >= 10) {
@@ -24,4 +27,4 @@ function Keyboard(props) {
   );
 }
 
-export default Keyboard;
+export default Key;

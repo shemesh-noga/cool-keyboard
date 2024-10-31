@@ -24,56 +24,62 @@
   padding: 0%;
   font-family: "Manrope";
   font-weight: 700;
+  color: white;
 }
 
 .settingsItem {
+  color: white;
+  background-color: rgb(135, 115, 153);
   align-content: center;
   display: inline;
   margin: 10px;
-  width: 100px;
-  height: 50px;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all linear 0.005s;
+}
+
+.settingsItem:hover {
+  transform: scale(1.1);
 }
 
 #text {
   justify-content: center;
   text-align: center;
+  margin-bottom: 50px;
 }
 
 .keyboardKey {
   align-content: center;
   display: flex;
+  justify-content: center;
   margin: 8px;
-  width: 10px;
-  gap: 5px;
-  background-color: bisque;
-  margin: 0;
-}
-
-#NumbersDiv {
-  background-color: rgb(255, 255, 255);
   width: 80vw;
 }
 
 #LettersDiv {
-  background-color: rgb(255, 255, 255);
   width: 80vw;
-}
-
-#SpecialDiv {
-  background-color: rgb(255, 255, 255);
-  width: 80vw;
-}
-
-.keyboardKey {
-  width: 80vw;
-  display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 #Keyboard {
-  border: 1px solid black;
+  margin: auto;
+  width: 82vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#controlDiv {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 80px;
+  margin-top: 15px;
 }

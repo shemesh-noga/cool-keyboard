@@ -1,9 +1,26 @@
 .keyNumber {
-  color: red;
+  color: rgb(0, 0, 0);
 }
 
 .KeySingle {
-  padding: 5px 10px;
-  margin: 1px;
-  font-size: 1.5em;
+  color: rgb(255, 255, 255);
+  padding: 15px 25px;
+  margin: 3px 5px;
+  font-size: 1.7em;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.15s linear 0.005s;
+  background-color: #ac9bcf;
+  cursor: pointer;
+  box-shadow: 4px 4px 2px darkblue;
+}
+
+.KeySingle:hover {
+  transform: scale(1.05);
+  background-color: #947fbe;
+  font-weight: 500;
+}
+
+.space {
+  width: 30vw;
 }
