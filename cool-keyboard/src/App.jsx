@@ -20,7 +20,6 @@ function App() {
   const special = [...language].filter((keychar, i) => i > language.length - 8);
 
   function handleClickKey(keyChar) {
-    console.log("pressed  " + keyChar + "  hi Noga and Rebbeka");
     setUsersText(usersText + keyChar);
   }
 
