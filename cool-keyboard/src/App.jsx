@@ -1,6 +1,11 @@
 import { useState } from "react";
 import "./App.css";
-import { hebrew, englishLowerCase, englishUpperCase } from "./languages";
+import {
+  hebrew,
+  englishLowerCase,
+  englishUpperCase,
+  allLang,
+} from "./languages";
 import Keyboard from "./components/Keyboard";
 import ButtonSetting from "./components/ButtonSetting";
 import Text from "./components/Text";
@@ -64,6 +69,15 @@ function App() {
 
   function handleColorBtn(colorVal) {
     setColor(colorVal);
+  }
+
+  function handleLangChangeBtn() {
+    console.log("language: ", language);
+    if (language === englishUpperCase || language === englishLowerCase) {
+      setLanguage(hebrew);
+    } else if (language === hebrew) {
+      setLanguage(englishUpperCase);
+    }
   }
 
   function handleSettingClick(id) {
@@ -135,6 +149,11 @@ function App() {
       <ButtonSetting
         id="fonsizeMinusBtn"
         value="-"
+        onClickSetting={handleSettingClick}
+      />
+      <ButtonSetting
+        id="langChangeBtn"
+        value="Change Lang"
         onClickSetting={handleSettingClick}
       />
 
