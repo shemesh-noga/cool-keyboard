@@ -108,11 +108,19 @@ function App() {
           />
         )}
 
+<<<<<<< HEAD
         <ButtonSetting
           id="undoBtn"
           value="Undo"
           onClickSetting={() => handleUndoBtn}
         />
+=======
+      <ButtonSetting
+        id="undoBtn"
+        value="Undo"
+        onClickSetting={() => handleUndoBtn()}
+      />
+>>>>>>> b14b263a865192711985d94c31599afc0a1b1cfc
 
         <Select
           id="selectFont"
@@ -122,6 +130,7 @@ function App() {
           label="Font: "
         />
 
+<<<<<<< HEAD
         <ButtonSetting
           id="fonsizePlusBtn"
           value="+"
@@ -135,6 +144,22 @@ function App() {
           value="-"
           onClickSetting={() => handleFonsizeMinusBtn()}
         />
+=======
+      <ButtonSetting
+        id="fonsizePlusBtn"
+        value="+"
+        onClickSetting={() => handleFonsizePlusBtn()}
+      />
+      <p className="settingsItem" style={{ fontSize: fontSize }}>
+        {fontSize}
+      </p>
+
+      <ButtonSetting
+        id="fonsizeMinusBtn"
+        value="-"
+        onClickSetting={() => handleFonsizeMinusBtn()}
+      />
+>>>>>>> b14b263a865192711985d94c31599afc0a1b1cfc
 
         <label htmlFor="selectLanguage">Language: </label>
         <select
