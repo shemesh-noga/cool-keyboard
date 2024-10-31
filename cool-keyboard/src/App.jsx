@@ -21,7 +21,8 @@ function App() {
   const [color, setColor] = useState("#000000");
   const [font, setFont] = useState("");
   let size;
-  // allLang.map((lang) => console.log(Object.values(lang)[0]));
+  // let LangArr = JSON.parse(JSON.stringify(allLang));
+  // console.log(LangArr);
 
   const numbers = [...language].filter((keychar, i) => i < 10);
   const letters = [...language].filter(
@@ -56,10 +57,6 @@ function App() {
 
   function handleUndoBtn() {
     alert(`Entered handle undo btn`);
-  }
-
-  function handleFontBtn() {
-    alert(`Entered handle font type btn`);
   }
 
   function handleFonsizePlusBtn() {
@@ -172,13 +169,21 @@ function App() {
       <select
         id="selectLanguage"
         onChange={(e) => {
-          let newLang = e.target.value.split(",");
-          console.log(newLang);
-          setLanguage(newLang);
+          let langName = e.target.value;
+          console.log(langName);
+          let thisArr;
+          for (let langObj of allLang) {
+            if (Object.keys(langObj)[0] === langName) {
+              thisArr = Object.values(langObj)[0];
+              console.log(thisArr);
+              setLanguage(thisArr);
+              break;
+            }
+          }
         }}
       >
         {allLang.map((langObj) => (
-          <option value={Object.values(langObj)}>
+          <option value={Object.keys(langObj)[0]}>
             {Object.keys(langObj)[0]}
           </option>
         ))}

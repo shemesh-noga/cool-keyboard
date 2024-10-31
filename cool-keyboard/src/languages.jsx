@@ -42,7 +42,7 @@ export const hebrew = [
   " ",
   "!",
   "?",
-  "-",
+  ",",
 ];
 
 export const englishUpperCase = [
@@ -88,7 +88,7 @@ export const englishUpperCase = [
   " ",
   "!",
   "?",
-  "-",
+  ",",
 ];
 
 export const englishLowerCase = [
@@ -134,7 +134,7 @@ export const englishLowerCase = [
   " ",
   "!",
   "?",
-  "-",
+  ",",
 ];
 
 export const allLang = [{ hebrew: hebrew }, { english: englishLowerCase }];
