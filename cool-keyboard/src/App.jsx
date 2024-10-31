@@ -1,19 +1,21 @@
 import { useState } from "react";
 import "./App.css";
-import { hebrew, english } from "./languages";
+import { hebrew, englishLowerCase, englishUpperCase } from "./languages";
 import Keyboard from "./components/Keyboard";
 import ButtonSetting from "./components/ButtonSetting";
 import Text from "./components/Text";
 
 function App() {
   const [usersText, setUsersText] = useState("Hello Noga, Good morning :)");
+  const [language, setLanguage] = useState(englishUpperCase);
+
   console.log(hebrew);
-  console.log(english);
-  const numbers = [...english].filter((keychar, i) => i < 10);
-  const letters = [...english].filter(
-    (keychar, i) => i < english.length - 8 && i >= 10
+  console.log(englishLowerCase);
+  const numbers = [...language].filter((keychar, i) => i < 10);
+  const letters = [...language].filter(
+    (keychar, i) => i < language.length - 8 && i >= 10
   );
-  const special = [...english].filter((keychar, i) => i > english.length - 8);
+  const special = [...language].filter((keychar, i) => i > language.length - 8);
 
   function handleClickKey(keyChar) {
     console.log("pressed  " + keyChar + "  hi Noga and Rebbeka");
@@ -30,7 +32,9 @@ function App() {
   }
 
   function handleCaseChange() {
-    alert(`Entered handle case btn`);
+    return language === englishUpperCase
+      ? setLanguage(englishLowerCase)
+      : setLanguage(englishUpperCase);
   }
 
   function handleUndoBtn() {
@@ -99,11 +103,16 @@ function App() {
         value="Clear"
         onClickSetting={handleSettingClick}
       />
-      <ButtonSetting
-        id="toLowerOrLowerCase"
-        value="To lower case"
-        onClickSetting={handleSettingClick}
-      />
+      {language !== hebrew && (
+        <ButtonSetting
+          id="toLowerOrLowerCase"
+          value={
+            language == englishUpperCase ? "To lower case" : "To upper case"
+          }
+          onClickSetting={handleSettingClick}
+        />
+      )}
+
       <ButtonSetting
         id="undoBtn"
         value="Undo"
@@ -125,6 +134,7 @@ function App() {
         value="-"
         onClickSetting={handleSettingClick}
       />
+
       <label for="color">Color:</label>
       <input type="color" id="colorBtn" name="colorBtn" value="#ff0000" />
 
@@ -137,7 +147,7 @@ function App() {
             key={`number-${i}`}
             value={keyChar}
             onclickKey={handleClickKey}
-            langLength={english.length}
+            langLength={language.length}
           />
         ))}
       </div>
@@ -149,7 +159,7 @@ function App() {
             key={`letter-${i + 10}`}
             value={keyChar}
             onclickKey={handleClickKey}
-            langLength={english.length}
+            langLength={language.length}
           />
         ))}
       </div>
@@ -157,11 +167,11 @@ function App() {
       <div id="SpecialDiv">
         {special.map((keyChar, i) => (
           <Keyboard
-            id={english.length - 8 + i}
-            key={`special-${english.length - 8 + i}`}
+            id={language.length - 8 + i}
+            key={`special-${language.length - 8 + i}`}
             value={keyChar}
             onclickKey={handleClickKey}
-            langLength={english.length}
+            langLength={language.length}
           />
         ))}
       </div>
