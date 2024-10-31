@@ -48,3 +48,32 @@
   background-color: bisque;
   margin: 0;
 }
+
+#NumbersDiv {
+  background-color: rgb(255, 255, 255);
+  width: 80vw;
+}
+
+#LettersDiv {
+  background-color: rgb(255, 255, 255);
+  width: 80vw;
+}
+
+#SpecialDiv {
+  background-color: rgb(255, 255, 255);
+  width: 80vw;
+}
+
+.keyboardKey {
+  width: 80vw;
+  display: flex;
+  flex-direction: row;
+}
+
+#Keyboard {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
