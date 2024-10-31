@@ -13,7 +13,7 @@ import Text from "./components/Text";
 function App() {
   const [usersText, setUsersText] = useState("Hello Noga, Good morning :)");
   const [language, setLanguage] = useState(englishUpperCase);
-  const [fontSize, setFontSize] = useState(16);
+  const [fontSize, setFontSize] = useState(32);
   let size;
 
   const numbers = [...language].filter((keychar, i) => i < 10);
